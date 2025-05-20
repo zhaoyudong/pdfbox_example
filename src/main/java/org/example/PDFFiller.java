@@ -26,8 +26,11 @@ public class PDFFiller {
             // Allow setting fields even if they were originally read-only
             form.setNeedAppearances(true);
 
+            // This method will load all the fields into cached map
+            form.setCacheFields(true);
+
             for (Map.Entry<String, String> entry : fieldValues.entrySet()) {
-                PDField field = FieldUtils.findFieldRecursive(form, entry.getKey());
+                PDField field = form.getField(entry.getKey());
                 if (field != null) {
                     field.setValue(entry.getValue());
                 } else {
